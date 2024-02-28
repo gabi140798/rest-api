@@ -1,4 +1,4 @@
-package pl.kurs.zad1.model;
+package pl.kurs.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +11,7 @@ import lombok.Setter;
 public class Garage {
 
     private int id;
-    private String places,address;
+    private int places;
+    private String address;
     private boolean lpgAllowed;
 }

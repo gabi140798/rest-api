@@ -1,4 +1,4 @@
-package pl.kurs.zad2.exceptions;
+package pl.kurs.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

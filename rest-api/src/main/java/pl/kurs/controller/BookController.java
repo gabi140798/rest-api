@@ -1,6 +1,7 @@
 package pl.kurs.controller;
 
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,26 +10,26 @@ import pl.kurs.exceptions.BookNotFoundException;
 import pl.kurs.model.Book;
 import pl.kurs.model.command.CreateBookCommand;
 import pl.kurs.model.command.EditBookCommand;
+import pl.kurs.service.BookIdGenerator;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequestMapping("/api/v1/books")
 @Slf4j
+@RequiredArgsConstructor
 public class BookController {
 
-    private List<Book> books = Collections.synchronizedList(new ArrayList<>());
 
-    private AtomicInteger generator = new AtomicInteger(0);
+    private final List<Book> books;
+
+    private final BookIdGenerator bookIdGenerator;
 
     @PostConstruct
     public void init(){
-        books.add(new Book(generator.incrementAndGet(), "Ogniem i mieczem", "LEKTURA", true));
-        books.add(new Book(generator.incrementAndGet(), "Ogniem i mieczem 2", "LEKTURA", true));
+        books.add(new Book(bookIdGenerator.getId(), "Ogniem i mieczem", "LEKTURA", true));
+        books.add(new Book(bookIdGenerator.getId(), "Ogniem i mieczem 2", "LEKTURA", true));
     }
 
     @GetMapping
@@ -39,7 +40,7 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody CreateBookCommand command){
-        Book book = new Book(generator.incrementAndGet(), command.getTitle(), command.getCategory(), true);
+        Book book = new Book(bookIdGenerator.getId(), command.getTitle(), command.getCategory(), true);
         books.add(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(book);
     }
@@ -63,7 +64,7 @@ public class BookController {
         book.setAvailable(command.getAvailable());
         book.setCategory(command.getCategory());
         book.setTitle(command.getTitle());
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.OK).body(book);
     }
 
     @PatchMapping("/{id}")
@@ -72,6 +73,6 @@ public class BookController {
         Optional.ofNullable(command.getAvailable()).ifPresent(book::setAvailable);
         Optional.ofNullable(command.getCategory()).ifPresent(book::setCategory);
         Optional.ofNullable(command.getTitle()).ifPresent(book::setTitle);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.OK).body(book);
     }
 }

@@ -1,4 +1,4 @@
-package pl.kurs.zad2.model.command;
+package pl.kurs.model.command;
 
 import lombok.Getter;
 import lombok.Setter;

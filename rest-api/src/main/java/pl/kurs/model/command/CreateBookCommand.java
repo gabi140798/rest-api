@@ -1,12 +1,12 @@
 package pl.kurs.model.command;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serial;
-
 @Getter
 @Setter
+@AllArgsConstructor
 public class CreateBookCommand {
 
     private String title;

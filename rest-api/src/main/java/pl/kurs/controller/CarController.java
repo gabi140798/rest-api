@@ -1,14 +1,14 @@
-package pl.kurs.zad2.controller;
+package pl.kurs.controller;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.kurs.zad2.exceptions.CarNotFoundException;
-import pl.kurs.zad2.model.Car;
-import pl.kurs.zad2.model.command.CreateCarCommand;
-import pl.kurs.zad2.model.command.EditCarCommand;
+import pl.kurs.exceptions.CarNotFoundException;
+import pl.kurs.model.Car;
+import pl.kurs.model.command.CreateCarCommand;
+import pl.kurs.model.command.EditCarCommand;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
-@RequestMapping("/api/v1/car")
+@RequestMapping("/api/v1/cars")
 @Slf4j
 public class CarController {
 

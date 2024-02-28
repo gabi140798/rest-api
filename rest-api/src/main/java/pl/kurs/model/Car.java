@@ -1,4 +1,4 @@
-package pl.kurs.zad2.model;
+package pl.kurs.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,5 +10,7 @@ import lombok.Setter;
 public class Car {
 
     private int id;
-    private String brand,model,fuelType;
+    private String brand;
+    private String model;
+    private String fuelType;
 }
