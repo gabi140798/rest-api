@@ -66,7 +66,7 @@ public class BookController {
         book.setTitle(command.getTitle());
         return ResponseEntity.status(HttpStatus.OK).body(book);
     }
-
+//
     @PatchMapping("/{id}")
     public ResponseEntity<Book> editBookPartially(@PathVariable int id, @RequestBody EditBookCommand command){
         Book book = books.stream().filter(b -> b.getId() == id).findFirst().orElseThrow(BookNotFoundException::new);
