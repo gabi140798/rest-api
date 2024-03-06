@@ -49,7 +49,7 @@ class BookControllerTest {
                 .andExpect(jsonPath("$.category").value("LEKTURA"))
                 .andExpect(jsonPath("$.available").value(true));
     }
-
+//
     @Test
     public void shouldAddBook() throws Exception {
 
